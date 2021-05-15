@@ -1,0 +1,66 @@
+{
+  "name": "vrware",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@chakra-ui/react": "^1.1.4",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
+    "@fortawesome/react-fontawesome": "^0.1.9",
+    "@material-ui/core": "^4.9.5",
+    "@material-ui/icons": "^4.9.1",
+    "@nivo/line": "^0.62.0",
+    "@nivo/pie": "^0.62.0",
+    "@popperjs/core": "^2.4.4",
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.9.0",
+    "antd": "^4.3.3",
+    "bootstrap": "^4.3.1",
+    "easy-peasy": "^3.3.1",
+    "emotion": "^10.0.27",
+    "escape-html": "^1.0.3",
+    "framer-motion": "^3.2.1",
+    "js-cookie": "^2.2.1",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.9",
+    "react-dom": "^16.8.6",
+    "react-dropzone": "^11.0.1",
+    "react-google-login": "^5.2.2",
+    "react-lottie": "^1.2.3",
+    "react-mic-plus": "git+https://ff27df864be80603a6a869e62f3f32e434159d3c:x-oauth-basic@github.com/ngc2392/React-Mic-Plus-Private.git",
+    "react-particles-js": "^2.7.0",
+    "react-popper": "^2.2.3",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.3",
+    "react-stopwatch": "^2.0.4",
+    "react-toast-notifications": "^2.4.0",
+    "react-tooltip": "^4.2.7",
+    "slate": "^0.58.4",
+    "slate-history": "^0.58.4",
+    "slate-react": "^0.58.4",
+    "styled-components": "^4.4.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+<html>
+
+    <head>
+        <style>
+            h3 {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>From {{ email }}</h1>
+        <h3>Reason for contact: {{ reason_for_contact }}</h3>
+        <div>
+            <span>Here are all form details:</span>
+            <ul>
+                <li><b>First Name:</b> {{ first_name }}</li>
+                <li><b>Last Name:</b> {{ last_name }}</li>
+                <li><b>Email:</b>{{ email }}</li>
+                <li><b>Phone:</b>{{ phone }}</li>
+                <li><b>Role:</b>{{ role }}</li>
+                <li><b>Reason for contact:</b> {{ reason_for_contact }}</li>
+            </ul>
+        </div>
+    </body>
+</html>

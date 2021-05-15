@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+    frontend:
+        container_name: 'frontend_container'
+        build: .
+        stdin_open: true
+        ports:
+            - "3000:3000"
+        depends_on:
+            - django
+        networks:
+            - nginx_network
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+        # if we want hot reloading. Need to 'npm install'
+        volumes:
+            - .:/app/frontend
+            - /app/frontend/node_modules
+        # volumes:
+        #     - node_modules:/app/frontend/node_modules
+    django:
+        container_name: 'django_container'
+        build: ./Backend
+        command: gunicorn --access-logfile "-" --error-logfile "-" --capture-output --workers 3 --worker-class=gevent --timeout=300 --bind :8000 VRWare.wsgi:application
+        depends_on:
+            - db
+            - redis
+        networks:
+            - nginx_network
+            - db_network
+        volumes:
+            # where we will save uploaded files. Celery worker can then access them
+            - downloaded-files-volume:/app/Backend/media/audio/
+
+    celery_worker:
+        build: ./Backend
+        command: 'celery -A VRWare worker -l info'
+        container_name: 'celery_container'
+        depends_on:
+            - redis
+        networks:
+            - nginx_network
+            # celery worker needs access to database
+            - db_network
+        volumes:
+            - downloaded-files-volume:/app/Backend/media/audio/
+    redis:
+        container_name: 'redis_container'
+        image: redis
+        restart: always
+        ports:
+            - 6379:6379
+        networks:
+            - nginx_network
+
+    nginx:
+        container_name: 'nginx_container'
+        image: nginx:latest
+        ports: 
+            - 8000:80 # we want to access our app at 127.0.0.1:8000, and we want NginX to listen on port 80 in the container. In a production environment, we wuld use 80:80 instead
+        depends_on:
+            - django
+        volumes:
+            - ./config/nginx/conf.d:/etc/nginx/conf.d
+        networks:
+            - nginx_network
+    db:
+        container_name: 'database_container'
+        image: postgres:latest
+        env_file:
+            - Backend/VRWare/.env
+        networks:
+            - db_network
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+        # uncomment if you want to be able to access database from host (such as connecting to the database via DBeaver)
+        ports:
+            - 5432:5432
+networks:
+    nginx_network:
+        driver: bridge
+    db_network:
+        driver: bridge
+
+volumes:
+    downloaded-files-volume:
+    postgres_data:
+    # node_modules:
